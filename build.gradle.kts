@@ -11,7 +11,6 @@ java {
   toolchain {
     languageVersion = JavaLanguageVersion.of(21)
   }
-  withJavadocJar()
   withSourcesJar()
 }
 
@@ -35,6 +34,32 @@ tasks.test {
 }
 
 mavenPublishing {
+  coordinates(group.toString(), "jts-jackson3-module", version.toString())
+  pom {
+    name.set("JTS Jackson 3 Module")
+    description.set("Jackson 3 module for JTS Geometry (GeoJSON serialization/deserialization)")
+    url.set("https://github.com/aytronnFR/jts-jackson3-module")
+
+    licenses {
+      license {
+        name.set("MIT License")
+        url.set("https://opensource.org/license/mit")
+      }
+    }
+
+    developers {
+      developer {
+        id.set("aytronnfr")
+        name.set("aytronn")
+      }
+    }
+
+    scm {
+      url.set("https://github.com/aytronnFR/jts-jackson3-module")
+      connection.set("scm:git:https://github.com/aytronnfr/jts-jackson3-module.git")
+      developerConnection.set("scm:git:ssh://git@github.com/aytronnfr/jts-jackson3-module.git")
+    }
+  }
   publishToMavenCentral(automaticRelease = true)
   if (!providers.gradleProperty("skipSigning").isPresent) {
     signAllPublications()
@@ -43,47 +68,14 @@ mavenPublishing {
 
 tasks.matching {
   it.name == "generateMetadataFileForMavenPublication"
-      || it.name == "generateMetadataFileForMavenJavaPublication"
-      || it.name == "publishMavenJavaPublicationToMavenCentralRepository"
-      || it.name == "signMavenJavaPublication"
+      || it.name == "publishMavenPublicationToMavenCentralRepository"
+      || it.name == "publishMavenPublicationToMavenLocal"
+      || it.name == "signMavenPublication"
 }.configureEach {
   dependsOn("plainJavadocJar")
 }
 
 publishing {
-  publications {
-    create<MavenPublication>("mavenJava") {
-      from(components["java"])
-      artifactId = "jts-jackson3-module"
-
-      pom {
-        name.set("JTS Jackson 3 Module")
-        description.set("Jackson 3 module for JTS Geometry (GeoJSON serialization/deserialization)")
-        url.set("https://github.com/aytronnFR/jts-jackson3-module")
-
-        licenses {
-          license {
-            name.set("MIT License")
-            url.set("https://opensource.org/license/mit")
-          }
-        }
-
-        developers {
-          developer {
-            id.set("aytronnfr")
-            name.set("aytronn")
-          }
-        }
-
-        scm {
-          url.set("https://github.com/aytronnFR/jts-jackson3-module")
-          connection.set("scm:git:https://github.com/aytronnfr/jts-jackson3-module.git")
-          developerConnection.set("scm:git:ssh://git@github.com/aytronnfr/jts-jackson3-module.git")
-        }
-      }
-    }
-  }
-
   repositories {
     maven {
       name = "GitHubPackages"
