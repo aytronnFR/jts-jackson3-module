@@ -57,4 +57,4 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew --no-daemon -PskipSigning=true -Pversion="${{ steps.version.outputs.value }}" clean publish
+        run: ./gradlew --no-daemon -PskipSigning=true -Pversion="${{ steps.version.outputs.value }}" clean publishMavenPublicationToGitHubPackagesRepository
