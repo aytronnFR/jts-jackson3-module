@@ -11,7 +11,7 @@ Compatible with:
 
 ```kotlin
 dependencies {
-  implementation("io.github.aytronn:jts-jackson3-module:0.1.0")
+  implementation("io.github.aytronn:jts-jackson3-module:0.0.1")
 }
 ```
 
