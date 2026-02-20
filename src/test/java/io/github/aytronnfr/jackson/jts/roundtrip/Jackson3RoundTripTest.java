@@ -1,12 +1,12 @@
-package io.github.aytronn.jackson.jts.roundtrip;
+package io.github.aytronnfr.jackson.jts.roundtrip;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import io.github.aytronn.jackson.jts.GeometryType;
-import io.github.aytronn.jackson.jts.IncludeBoundingBox;
-import io.github.aytronn.jackson.jts.JtsModule;
-import io.github.aytronn.jackson.jts.support.GeometryFixtures;
+import io.github.aytronnfr.jackson.jts.GeometryType;
+import io.github.aytronnfr.jackson.jts.IncludeBoundingBox;
+import io.github.aytronnfr.jackson.jts.JtsModule;
+import io.github.aytronnfr.jackson.jts.support.GeometryFixtures;
 import org.junit.jupiter.api.Test;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;

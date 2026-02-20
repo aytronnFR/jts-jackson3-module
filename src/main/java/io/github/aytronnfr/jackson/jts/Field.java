@@ -1,4 +1,4 @@
-package io.github.aytronn.jackson.jts;
+package io.github.aytronnfr.jackson.jts;
 
 final class Field {
   static final String TYPE = "type";

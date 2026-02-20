@@ -1,4 +1,4 @@
-package io.github.aytronn.jackson.jts;
+package io.github.aytronnfr.jackson.jts;
 
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryCollection;
