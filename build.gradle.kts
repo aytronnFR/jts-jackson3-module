@@ -41,6 +41,15 @@ mavenPublishing {
   }
 }
 
+tasks.matching {
+  it.name == "generateMetadataFileForMavenPublication"
+      || it.name == "generateMetadataFileForMavenJavaPublication"
+      || it.name == "publishMavenJavaPublicationToMavenCentralRepository"
+      || it.name == "signMavenJavaPublication"
+}.configureEach {
+  dependsOn("plainJavadocJar")
+}
+
 publishing {
   publications {
     create<MavenPublication>("mavenJava") {
