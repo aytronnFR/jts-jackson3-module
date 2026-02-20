@@ -1,4 +1,4 @@
-package io.github.aytronn.jackson.jts;
+package io.github.aytronnfr.jackson.jts;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

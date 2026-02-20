@@ -1,4 +1,4 @@
-name: Publish
+name: Publish Maven Central
 
 on:
   push:
@@ -13,10 +13,9 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
-  publish:
+  publish-central:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -53,8 +52,10 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
-      - name: Publish to GitHub Packages
+      - name: Publish to Maven Central
         env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew --no-daemon -PskipSigning=true -Pversion="${{ steps.version.outputs.value }}" clean publish
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        run: ./gradlew --no-daemon -Pversion="${{ steps.version.outputs.value }}" publishAndReleaseToMavenCentral

@@ -1,6 +1,7 @@
 plugins {
   `java-library`
   `maven-publish`
+  id("com.vanniktech.maven.publish") version "0.36.0"
 }
 
 group = property("group") as String
@@ -33,6 +34,13 @@ tasks.test {
   useJUnitPlatform()
 }
 
+mavenPublishing {
+  publishToMavenCentral(automaticRelease = true)
+  if (!providers.gradleProperty("skipSigning").isPresent) {
+    signAllPublications()
+  }
+}
+
 publishing {
   publications {
     create<MavenPublication>("mavenJava") {
@@ -53,15 +61,15 @@ publishing {
 
         developers {
           developer {
-            id.set("aytronnFR")
+            id.set("aytronnfr")
             name.set("aytronn")
           }
         }
 
         scm {
           url.set("https://github.com/aytronnFR/jts-jackson3-module")
-          connection.set("scm:git:https://github.com/aytronnFR/jts-jackson3-module.git")
-          developerConnection.set("scm:git:ssh://git@github.com/aytronnFR/jts-jackson3-module.git")
+          connection.set("scm:git:https://github.com/aytronnfr/jts-jackson3-module.git")
+          developerConnection.set("scm:git:ssh://git@github.com/aytronnfr/jts-jackson3-module.git")
         }
       }
     }
@@ -70,7 +78,7 @@ publishing {
   repositories {
     maven {
       name = "GitHubPackages"
-      url = uri("https://maven.pkg.github.com/aytronnFR/jts-jackson3-module")
+      url = uri("https://maven.pkg.github.com/aytronnfr/jts-jackson3-module")
       credentials {
         username = providers.gradleProperty("gpr.user")
           .orElse(providers.environmentVariable("GITHUB_ACTOR"))
